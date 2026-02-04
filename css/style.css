@@ -397,9 +397,18 @@ header {
 
 .repo-stats {
     display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
     gap: 1rem;
     font-size: 0.85rem;
     color: var(--text-secondary);
+    margin-top: auto;
+    /* Push to bottom of card */
+}
+
+.repo-updated {
+    margin-left: auto;
+    /* Push date to the right */
 }
 
 .repo-lang span {
