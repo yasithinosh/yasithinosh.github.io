@@ -6,9 +6,44 @@
     --accent-color: #38bdf8;
     --accent-hover: #0ea5e9;
     --glass-bg: rgba(30, 41, 59, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --font-main: 'Outfit', sans-serif;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    /* More subtle border */
+    --font-main: 'Outfit',
+        sans-serif;
     --gradient-1: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    --gradient-2: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 100%);
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+    /* Start hidden */
+}
+
+/* Delays for staggered animations */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
 }
 
 * {
@@ -155,7 +190,8 @@ header {
     align-items: center;
     justify-content: center;
     padding: 0 2rem;
-    padding-top: 80px; /* Offset for fixed header */
+    padding-top: 80px;
+    /* Offset for fixed header */
 }
 
 .hero-content {
@@ -177,6 +213,7 @@ header {
     margin-bottom: 1rem;
     background: linear-gradient(to right, #f8fafc, #94a3b8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -228,9 +265,22 @@ header {
 }
 
 @keyframes blob-bounce {
-    0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(0, 0); }
-    33% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(20px, -30px); }
-    66% { border-radius: 30% 70% 60% 40% / 30% 60% 40% 70%; transform: translate(-20px, 20px); }
+
+    0%,
+    100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: translate(0, 0);
+    }
+
+    33% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: translate(20px, -30px);
+    }
+
+    66% {
+        border-radius: 30% 70% 60% 40% / 30% 60% 40% 70%;
+        transform: translate(-20px, 20px);
+    }
 }
 
 /* About Section */
@@ -348,7 +398,8 @@ header {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #f1e05a; /* JS Yellow default */
+    background-color: #f1e05a;
+    /* JS Yellow default */
     margin-right: 5px;
 }
 
@@ -439,7 +490,8 @@ header {
     }
 
     .nav-links {
-        display: none; /* Add JS toggle for mobile later if needed */
+        display: none;
+        /* Add JS toggle for mobile later if needed */
     }
 
     .hamburger {
