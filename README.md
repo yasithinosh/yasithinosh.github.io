@@ -1,4 +1,4 @@
-# InoVoid Portfolio
+# My Portfolio
 
 A professional, modern, and interactive portfolio website built for **Yasith Inosh**.
 This project showcases skills, projects, and provides a way for potential clients or employers to make contact.
