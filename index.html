@@ -1,1 +1,116 @@
-InoVoid Development --Comming soon....
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InoVoid Development | Portfolio</title>
+    <meta name="description" content="Professional portfolio of InoVoid Development. Software Developer, Web Designer.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">InoVoid<span class="highlight">.</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <span class="greeting">Hello, I'm</span>
+                <h1 class="name">Yasith Inosh</h1>
+                <h2 class="title">Full Stack Developer</h2>
+                <p class="description">Building digital experiences with modern technologies. Passionate about clean code and intuitive design.</p>
+                <div class="hero-buttons">
+                    <a href="assets/dummy-cv.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Abstract visual or profile image -->
+                <div class="blob-wrapper">
+                    <div class="blob"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I am a passionate developer with a knack for creating seamless web applications. With a strong foundation in both front-end and back-end technologies, I aim to deliver high-quality, scalable solutions.</p>
+                        <ul class="skills-list">
+                            <li><i class="fas fa-check-circle"></i> JavaScript (ES6+)</li>
+                            <li><i class="fas fa-check-circle"></i> React & Node.js</li>
+                            <li><i class="fas fa-check-circle"></i> UI/UX Design</li>
+                            <li><i class="fas fa-check-circle"></i> Modern CSS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2 class="section-title">GitHub Projects</h2>
+                <p class="section-subtitle">A collection of my recent repositories.</p>
+                <div id="repo-grid" class="repo-grid">
+                    <!-- Repositories will be injected here via JS -->
+                    <div class="loader">Loading projects...</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <p>contact@yasithinosh.com</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Message" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2024 InoVoid Development. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
