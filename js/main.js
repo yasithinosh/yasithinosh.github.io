@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
         document.documentElement.setAttribute('data-theme', 'light');
         themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
     }
 
     themeToggle.addEventListener('click', () => {
