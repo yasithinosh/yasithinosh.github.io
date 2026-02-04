@@ -43,6 +43,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Scroll Reveal Animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+        el.style.animationPlayState = 'paused'; // Pause initially
+        observer.observe(el);
+    });
+
+    // Dynamic Copyright Year
+    const yearElement = document.querySelector('.footer p');
+    if (yearElement) {
+        const currentYear = new Date().getFullYear();
+        yearElement.innerHTML = `&copy; ${currentYear} InoVoid Development. All rights reserved.`;
+    }
+
     // Fetch GitHub Repositories
     const fetchRepos = async () => {
         try {
