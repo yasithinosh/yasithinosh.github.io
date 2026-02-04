@@ -329,6 +329,15 @@ header {
     padding: 6rem 0;
 }
 
+/* Loader */
+.loader {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    padding: 2rem;
+}
+
 .repo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

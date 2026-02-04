@@ -72,14 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch GitHub Repositories
     const fetchRepos = async () => {
+        repoContainer.innerHTML = '<div class="loader">Loading projects...</div>';
         try {
             const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&direction=desc`);
             if (!response.ok) throw new Error('Failed to fetch repositories');
 
             const repos = await response.json();
 
-            // Filter out forks and pick top 6 (optional filter)
-            const myRepos = repos.slice(0, 6);
+            // Filter out forks to show only original work, and pick top 6
+            const myRepos = repos.filter(repo => !repo.fork).slice(0, 6);
+
+            if (myRepos.length === 0) {
+                repoContainer.innerHTML = '<p style="text-align:center; color: var(--text-secondary);">No public repositories found.</p>';
+                return;
+            }
 
             repoContainer.innerHTML = ''; // Clear loader
 
@@ -89,24 +95,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } catch (error) {
             console.error('Error fetching repos:', error);
-            repoContainer.innerHTML = '<p style="text-align:center; color: var(--text-secondary);">Could not load projects at this time.</p>';
+            repoContainer.innerHTML = `
+                <div style="text-align:center; width: 100%;">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Could not load projects at this time.</p>
+                    <button id="retry-btn" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Retry</button>
+                </div>
+            `;
+            document.getElementById('retry-btn').addEventListener('click', fetchRepos);
         }
     };
 
     const createRepoCard = (repo) => {
         const div = document.createElement('div');
-        div.className = 'repo-card';
+        div.className = 'repo-card fade-up'; // Add fade-up for animation
 
-        // Language color mapping (simplified)
+        // Language color mapping
         const langColors = {
             JavaScript: '#f1e05a',
             HTML: '#e34c26',
             CSS: '#563d7c',
             Python: '#3572A5',
             Java: '#b07219',
-            TypeScript: '#2b7489'
+            TypeScript: '#2b7489',
+            Vue: '#41b883',
+            React: '#61dafb'
         };
         const langColor = langColors[repo.language] || '#ccc';
+        const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
         div.innerHTML = `
             <div class="repo-header">
@@ -122,11 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="repo-lang">
                     <span style="background-color: ${langColor}"></span>${repo.language || 'Code'}
                 </div>
-                <div class="repo-stars">
+                <div class="repo-stars" title="Stars">
                     <i class="far fa-star"></i> ${repo.stargazers_count}
                 </div>
-                <div class="repo-forks">
-                    <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                <div class="repo-updated" title="Last Updated">
+                    <i class="far fa-clock"></i> ${updatedDate}
                 </div>
             </div>
         `;
