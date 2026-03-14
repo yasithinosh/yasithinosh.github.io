@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuration
-    const githubUsername = 'yasithinosh'; // Change this to your GitHub username
+    const githubUsername = 'yasithinosh';
     const repoContainer = document.getElementById('repo-grid');
 
-    // Theme Toggle
+    // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
 
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -22,64 +20,53 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-
-        // Update icon
-        if (newTheme === 'light') {
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-        }
+        themeIcon.classList.replace(
+            newTheme === 'light' ? 'fa-moon' : 'fa-sun',
+            newTheme === 'light' ? 'fa-sun' : 'fa-moon'
+        );
     });
 
-    // Navigation and Mobile Menu
+    // Sticky header shadow
     const header = document.getElementById('header');
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    // Sticky Header Effect
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
-        } else {
-            header.style.boxShadow = 'none';
-        }
+        header.style.boxShadow = window.scrollY > 50
+            ? '0 10px 30px -10px rgba(2, 12, 27, 0.7)'
+            : 'none';
     });
 
-    // Mobile Menu Toggle
+    // Mobile menu toggle
     hamburger.addEventListener('click', () => {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        if (navLinks.style.display === 'flex') {
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '80px';
-            navLinks.style.left = '0';
-            navLinks.style.width = '100%';
-            navLinks.style.background = 'var(--bg-color)';
-            navLinks.style.padding = '2rem';
-            navLinks.style.borderBottom = '1px solid var(--glass-border)';
+        const isOpen = navLinks.style.display === 'flex';
+        navLinks.style.display = isOpen ? 'none' : 'flex';
+        if (!isOpen) {
+            Object.assign(navLinks.style, {
+                flexDirection: 'column',
+                position: 'absolute',
+                top: '80px',
+                left: '0',
+                width: '100%',
+                background: 'var(--bg-color)',
+                padding: '2rem',
+                borderBottom: '1px solid var(--glass-border)'
+            });
         }
     });
 
-    // Smooth Scrolling for Anchor Links
+    // Smooth scroll + close mobile menu on link click
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            navLinks.style.display = ''; // Close mobile menu on click
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            navLinks.style.display = '';
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // Scroll Reveal Animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
+    // Scroll-reveal for .fade-up elements
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -87,21 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => {
-        el.style.animationPlayState = 'paused'; // Pause initially
+        el.style.animationPlayState = 'paused';
         observer.observe(el);
     });
 
-    // Dynamic Copyright Year
+    // Dynamic copyright year
     const yearElement = document.querySelector('.footer p');
     if (yearElement) {
-        const currentYear = new Date().getFullYear();
-        yearElement.innerHTML = `&copy; ${currentYear} InoVoid Development. All rights reserved.`;
+        yearElement.innerHTML = `&copy; ${new Date().getFullYear()} InoVoid Development. All rights reserved.`;
     }
 
-    // Fetch GitHub Repositories
+    // Fetch GitHub repositories
     const fetchRepos = async () => {
         repoContainer.innerHTML = '<div class="loader">Loading projects...</div>';
         try {
@@ -109,8 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Failed to fetch repositories');
 
             const repos = await response.json();
-
-            // Filter out forks to show only original work, and pick top 6
             const myRepos = repos.filter(repo => !repo.fork).slice(0, 6);
 
             if (myRepos.length === 0) {
@@ -118,12 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            repoContainer.innerHTML = ''; // Clear loader
-
-            myRepos.forEach(repo => {
-                const card = createRepoCard(repo);
-                repoContainer.appendChild(card);
-            });
+            repoContainer.innerHTML = '';
+            myRepos.forEach(repo => repoContainer.appendChild(createRepoCard(repo)));
         } catch (error) {
             console.error('Error fetching repos:', error);
             repoContainer.innerHTML = `
@@ -138,9 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createRepoCard = (repo) => {
         const div = document.createElement('div');
-        div.className = 'repo-card fade-up'; // Add fade-up for animation
+        div.className = 'repo-card fade-up';
 
-        // Language color mapping
         const langColors = {
             JavaScript: '#f1e05a',
             HTML: '#e34c26',
@@ -151,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Vue: '#41b883',
             React: '#61dafb'
         };
+
         const langColor = langColors[repo.language] || '#ccc';
         const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 

@@ -1,0 +1,7 @@
+node_modules
+.git
+tests
+playwright-report
+test-results
+playwright.config.js
+README.md
