@@ -4,46 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <meta name="description" content="Professional portfolio of InoVoid Development. Software Developer, Web Designer.">
+    <title>Yasith Inosh | Full-Stack & DevOps Engineer</title>
+    <meta name="description" content="Portfolio of Yasith Inosh Rajapaksha – Full-Stack & DevOps Engineer, BICT Undergraduate at Rajarata University of Sri Lanka.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
+    <canvas id="particle-canvas"></canvas>
+
     <header id="header">
         <nav class="navbar">
             <div class="logo">YI<span class="highlight">.</span></div>
             <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
                 <i class="fas fa-moon"></i>
             </button>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
     </header>
 
     <main>
+        <!-- Hero -->
         <section id="hero" class="hero-section">
             <div class="hero-content fade-up">
                 <span class="greeting">Hello, I'm</span>
                 <h1 class="name">Yasith Inosh</h1>
-                <h2 class="title">BICT (Hons) Undergraduate | AI & ML Researcher</h2>
-                <p class="description">Bridging the gap between high-performance Mobile Applications and Machine
-                    Learning. Building robust, scalable systems and researching AI solutions.</p>
+                <h2 class="title"><span id="typed-text"></span><span class="cursor">|</span></h2>
+                <p class="description">Full-Stack Engineer & DevOps enthusiast building scalable web applications, cloud deployments, and researching modern software solutions.</p>
                 <div class="hero-buttons">
-                    <a href="assets/dummy-cv.pdf" download class="btn btn-primary"><i class="fas fa-download"></i>
-                        Download CV</a>
+                    <a href="assets/My CV.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
                     <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/yasithinosh" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:yasithinosh1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="hero-visual fade-up delay-200">
@@ -51,128 +58,323 @@
                     <div class="profile-glow"></div>
                     <img src="assets/profile_pic.jpeg" alt="Yasith Inosh" class="profile-img">
                 </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">3+</span>
+                        <span class="stat-label">Years Coding</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">10+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">5+</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- About -->
         <section id="about" class="about-section">
             <div class="container">
                 <h2 class="section-title fade-up">About Me</h2>
                 <div class="about-content">
                     <div class="about-text fade-up delay-100">
-                        <p>I am a final-year Bachelor of Information and Communication Technology (Honours) student. My
-                            work focuses on building robust, scalable systems and researching Image Enhancement for Sign
-                            Language Recognition. I bridge the gap between hardware and software, specializing in
-                            cross-platform mobile apps, IoT systems, and AI-driven research.</p>
+                        <p>I am a final-year <strong>Bachelor of ICT (Honours)</strong> student at <strong>Rajarata University of Sri Lanka</strong>, specializing in Full-Stack development and DevOps engineering. I build scalable web applications using modern frontend and backend technologies, manage cloud deployments, and leverage containerization for robust delivery pipelines.</p>
 
                         <div class="focus-grid">
                             <div class="focus-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <h3>Academic Research</h3>
-                                <p>Enhancing image quality and augmentation for Sinhala Sign Language (SSL) recognition.
-                                </p>
+                                <i class="fas fa-layer-group"></i>
+                                <h3>Full-Stack Dev</h3>
+                                <p>End-to-end apps with React, Node.js, Express, and modern databases.</p>
+                            </div>
+                            <div class="focus-item">
+                                <i class="fas fa-infinity"></i>
+                                <h3>DevOps & Cloud</h3>
+                                <p>Docker, Kubernetes, CI/CD pipelines, AWS & Azure deployments.</p>
                             </div>
                             <div class="focus-item">
                                 <i class="fas fa-mobile-alt"></i>
-                                <h3>Mobile & Web</h3>
-                                <p>Crafting seamless user experiences using Flutter, React Native, and modern Web
-                                    technologies.</p>
-                            </div>
-                            <div class="focus-item">
-                                <i class="fas fa-cloud"></i>
-                                <h3>Backend & Cloud</h3>
-                                <p>Expert in Firebase Integration for real-time databases and authentication.</p>
-                            </div>
-                            <div class="focus-item">
-                                <i class="fas fa-cogs"></i>
-                                <h3>DevOps</h3>
-                                <p>Implementing CI/CD workflows and rigorous API testing with Postman.</p>
+                                <h3>Mobile Dev</h3>
+                                <p>Cross-platform apps with Flutter & React Native.</p>
                             </div>
                             <div class="focus-item">
                                 <i class="fas fa-microchip"></i>
-                                <h3>IoT & Hardware</h3>
-                                <p>Developing smart solutions with Arduino and integrated sensors.</p>
+                                <h3>IoT & Embedded</h3>
+                                <p>Smart systems using Arduino, ESP32, and real-time sensor integration.</p>
+                            </div>
+                            <div class="focus-item">
+                                <i class="fas fa-camera"></i>
+                                <h3>Media & Creative</h3>
+                                <p>Graphic design, drone operation, videography & photography.</p>
                             </div>
                             <div class="focus-item">
                                 <i class="fas fa-users"></i>
                                 <h3>Leadership</h3>
-                                <p>Senior Technical Officer and Head of Social Media for faculty media associations.</p>
+                                <p>Project Lead at ATIT, Junior Treasurer at ROST, Senior Technical Officer at FOT Media.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <h3 class="tech-stack-title">Tech Stack & Tools</h3>
-                        <div class="skills-categories">
-                            <div class="skill-category">
-                                <h4>Mobile & Web</h4>
-                                <div class="skill-tags">
-                                    <span><i class="fab fa-flutter"></i>Flutter</span>
-                                    <span><i class="fab fa-react"></i>React Native</span>
-                                    <span><i class="fab fa-node-js"></i>Node.js</span>
-                                    <span><i class="fas fa-fire"></i>Firebase</span>
-                                </div>
-                            </div>
-                            <div class="skill-category">
-                                <h4>DevOps & Tools</h4>
-                                <div class="skill-tags">
-                                    <span><i class="fas fa-infinity"></i>DevOps</span>
-                                    <span><i class="fas fa-paper-plane"></i>Postman</span>
-                                    <span><i class="fab fa-git-alt"></i>Git</span>
-                                    <span><i class="fab fa-github"></i>GitHub Actions</span>
-                                </div>
-                            </div>
-                            <div class="skill-category">
-                                <h4>Research & AI</h4>
-                                <div class="skill-tags">
-                                    <span><i class="fab fa-python"></i>Python</span>
-                                    <span><i class="fas fa-eye"></i>OpenCV</span>
-                                    <span><i class="fas fa-brain"></i>TensorFlow</span>
-                                </div>
-                            </div>
-                            <div class="skill-category">
-                                <h4>IoT & Embedded</h4>
-                                <div class="skill-tags">
-                                    <span><i class="fas fa-microchip"></i>Arduino</span>
-                                    <span><i class="fab fa-raspberry-pi"></i>Raspberry Pi</span>
-                                    <span><i class="fas fa-file-code"></i>C++</span>
-                                </div>
+                <!-- Skills -->
+                <div class="skills-section fade-up delay-200">
+                    <h3 class="subsection-title">Tech Stack & Tools</h3>
+                    <div class="skills-categories">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-code"></i> Languages</h4>
+                            <div class="skill-tags">
+                                <span><i class="fab fa-js"></i> JavaScript</span>
+                                <span><i class="fab fa-java"></i> Java</span>
+                                <span><i class="fab fa-python"></i> Python</span>
+                                <span><i class="fab fa-php"></i> PHP</span>
                             </div>
                         </div>
-
-
+                        <div class="skill-category">
+                            <h4><i class="fas fa-palette"></i> Frontend</h4>
+                            <div class="skill-tags">
+                                <span><i class="fab fa-react"></i> React.js</span>
+                                <span><i class="fab fa-html5"></i> HTML5</span>
+                                <span><i class="fab fa-css3-alt"></i> CSS3</span>
+                                <span><i class="fas fa-wind"></i> Tailwind CSS</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-server"></i> Backend</h4>
+                            <div class="skill-tags">
+                                <span><i class="fab fa-node-js"></i> Node.js</span>
+                                <span><i class="fas fa-bolt"></i> Express.js</span>
+                                <span><i class="fas fa-plug"></i> REST APIs</span>
+                                <span><i class="fas fa-shield-alt"></i> JWT Auth</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-database"></i> Databases</h4>
+                            <div class="skill-tags">
+                                <span><i class="fas fa-database"></i> PostgreSQL</span>
+                                <span><i class="fas fa-database"></i> MySQL</span>
+                                <span><i class="fas fa-fire"></i> Firebase</span>
+                                <span><i class="fas fa-cloud"></i> Supabase</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fab fa-docker"></i> DevOps & Cloud</h4>
+                            <div class="skill-tags">
+                                <span><i class="fab fa-docker"></i> Docker</span>
+                                <span><i class="fas fa-dharmachakra"></i> Kubernetes</span>
+                                <span><i class="fab fa-aws"></i> AWS</span>
+                                <span><i class="fab fa-microsoft"></i> Azure</span>
+                                <span><i class="fab fa-github"></i> GitHub Actions</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-mobile-alt"></i> Mobile</h4>
+                            <div class="skill-tags">
+                                <span><i class="fas fa-mobile-alt"></i> Flutter</span>
+                                <span><i class="fab fa-react"></i> React Native</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-microchip"></i> IoT & Embedded</h4>
+                            <div class="skill-tags">
+                                <span><i class="fas fa-microchip"></i> Arduino</span>
+                                <span><i class="fas fa-wifi"></i> ESP32</span>
+                                <span><i class="fab fa-raspberry-pi"></i> Raspberry Pi</span>
+                                <span><i class="fas fa-file-code"></i> C++</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-tools"></i> Tools</h4>
+                            <div class="skill-tags">
+                                <span><i class="fab fa-git-alt"></i> Git</span>
+                                <span><i class="fas fa-paper-plane"></i> Postman</span>
+                                <span><i class="fas fa-tasks"></i> Jira</span>
+                                <span><i class="fab fa-trello"></i> ClickUp</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Education -->
+        <section id="education" class="education-section">
+            <div class="container">
+                <h2 class="section-title fade-up">Education</h2>
+                <div class="edu-card fade-up delay-100">
+                    <div class="edu-icon"><i class="fas fa-university"></i></div>
+                    <div class="edu-info">
+                        <h3>Bachelor of Information Communication Technology (Hons)</h3>
+                        <p class="edu-uni"><i class="fas fa-map-marker-alt"></i> Rajarata University of Sri Lanka</p>
+                        <p class="edu-meta">
+                            <span><i class="far fa-calendar-alt"></i> Present – Expected Graduation 2027</span>
+                            <span class="gpa-badge"><i class="fas fa-star"></i> GPA 3.00+ (75 Credits)</span>
+                        </p>
+                        <p class="edu-desc">Focus on software engineering, computer networks, database systems, and emerging technologies. Active participant in faculty associations and tech exhibitions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="experience-section">
+            <div class="container">
+                <h2 class="section-title fade-up">Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Senior Technical Officer</h3>
+                                    <p class="timeline-company"><i class="fas fa-building"></i> FOT Media</p>
+                                </div>
+                                <span class="timeline-date">Feb 2026 – Present</span>
+                            </div>
+                            <ul class="timeline-points">
+                                <li>Led technical operations and system optimization for media production.</li>
+                                <li>Directed deployment and maintenance of professional cameras, drones, and audiovisual equipment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-up delay-100">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Head of Social Media Management</h3>
+                                    <p class="timeline-company"><i class="fas fa-building"></i> FOT Media</p>
+                                </div>
+                                <span class="timeline-date">Oct 2024 – Feb 2026</span>
+                            </div>
+                            <ul class="timeline-points">
+                                <li>Directed social media strategy, content creation, and campaign management.</li>
+                                <li>Improved online engagement and audience reach through data-driven campaigns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-up delay-200">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Project Lead & Member</h3>
+                                    <p class="timeline-company"><i class="fas fa-building"></i> ATIT – Association of Technology IT</p>
+                                </div>
+                                <span class="timeline-date">Jan 2024 – Present</span>
+                            </div>
+                            <ul class="timeline-points">
+                                <li>Led technical exhibition projects, overseeing planning, coordination, and delivery.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-up delay-300">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Junior Treasurer & Event Organizer</h3>
+                                    <p class="timeline-company"><i class="fas fa-building"></i> ROST – Robotic Society in Technology</p>
+                                </div>
+                                <span class="timeline-date">Jul 2023 – Present</span>
+                            </div>
+                            <ul class="timeline-points">
+                                <li>Managed event planning logistics and supported financial tracking and budgeting.</li>
+                                <li>Led exhibition project coordination and delivery of technical objectives.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="certifications-section">
+            <div class="container">
+                <h2 class="section-title fade-up">Certifications</h2>
+                <div class="cert-grid">
+                    <div class="cert-card fade-up">
+                        <div class="cert-icon"><i class="fas fa-dharmachakra"></i></div>
+                        <div class="cert-info">
+                            <h3>Introduction to Kubernetes</h3>
+                            <p class="cert-issuer">Simplilearn</p>
+                            <span class="cert-date">Mar 2026</span>
+                        </div>
+                    </div>
+                    <div class="cert-card fade-up delay-100">
+                        <div class="cert-icon"><i class="fab fa-docker"></i></div>
+                        <div class="cert-info">
+                            <h3>Docker Foundations Professional Certificate</h3>
+                            <p class="cert-issuer">LinkedIn Learning</p>
+                            <span class="cert-date">Mar 2026</span>
+                        </div>
+                    </div>
+                    <div class="cert-card fade-up delay-200">
+                        <div class="cert-icon"><i class="fas fa-dharmachakra"></i></div>
+                        <div class="cert-info">
+                            <h3>Introduction to Kubernetes (LFS158)</h3>
+                            <p class="cert-issuer">The Linux Foundation</p>
+                            <span class="cert-date">Mar 2026</span>
+                        </div>
+                    </div>
+                    <div class="cert-card fade-up delay-100">
+                        <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <h3>Microsoft Project: Planning for Successful Project Management</h3>
+                            <p class="cert-issuer">Microsoft Press</p>
+                            <span class="cert-date">Mar 2026</span>
+                        </div>
+                    </div>
+                    <div class="cert-card fade-up delay-200">
+                        <div class="cert-icon"><i class="fas fa-infinity"></i></div>
+                        <div class="cert-info">
+                            <h3>Introduction to DevOps Tools</h3>
+                            <p class="cert-issuer">Simplilearn</p>
+                            <span class="cert-date">Jan 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
         <section id="projects" class="projects-section">
             <div class="container">
-                <h2 class="section-title fade-up">GitHub Projects</h2>
-                <p class="section-subtitle fade-up delay-100">A collection of my recent repositories.</p>
+                <h2 class="section-title fade-up">Featured Projects</h2>
+                <p class="section-subtitle fade-up delay-100">Highlighted work from my GitHub repositories.</p>
                 <div id="repo-grid" class="repo-grid">
-                    <!-- Repositories will be injected here via JS -->
                     <div class="loader">Loading projects...</div>
                 </div>
             </div>
         </section>
 
+        <!-- Contact -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2 class="section-title fade-up">Get In Touch</h2>
                 <div class="contact-wrapper fade-up delay-200">
                     <div class="contact-info">
+                        <h3>Let's work together</h3>
+                        <p>I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
                         <div class="info-item">
                             <i class="fas fa-envelope"></i>
-                            <p>contact@yasithinosh.com</p>
+                            <p>yasithinosh1@gmail.com</p>
                         </div>
                         <div class="info-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>Colombo, Sri Lanka</p>
+                            <p>Piliyandala, Sri Lanka</p>
+                        </div>
+                        <div class="contact-socials">
+                            <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com/in/yasithinosh" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
                     <form class="contact-form" action="https://formspree.io/f/xqeylrer" method="POST">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="message" placeholder="Message" rows="5" required></textarea>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
                     </form>
                 </div>
             </div>
@@ -182,11 +384,11 @@
     <footer class="footer">
         <div class="container">
             <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yasithinosh" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:yasithinosh1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>&copy; 2024 InoVoid Development. All rights reserved.</p>
+            <p>&copy; <span id="footer-year"></span> Yasith Inosh Rajapaksha. All rights reserved.</p>
         </div>
     </footer>
 
