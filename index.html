@@ -111,6 +111,7 @@
                 <li><a href="#hero" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -440,6 +441,40 @@
                 </div>
             </div>
         </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <h2 class="section-title fade-up">Achievements & Gallery</h2>
+                <p class="section-subtitle fade-up delay-100">A visual showcase of events, projects, and milestones.</p>
+
+                <!-- Category Filter -->
+                <div class="gallery-filters fade-up delay-200">
+                    <button class="gallery-filter active" data-filter="all">All</button>
+                    <button class="gallery-filter" data-filter="event">Events</button>
+                    <button class="gallery-filter" data-filter="project">Projects</button>
+                    <button class="gallery-filter" data-filter="cert">Certifications</button>
+                    <button class="gallery-filter" data-filter="media">Media & Drone</button>
+                </div>
+
+                <!-- Gallery Grid (populated by JS) -->
+                <div class="gallery-grid" id="gallery-grid"></div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+            <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lb-next" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="lightbox-content" id="lb-content"></div>
+            <div class="lightbox-info">
+                <h3 class="lb-title" id="lb-title"></h3>
+                <p class="lb-caption" id="lb-caption"></p>
+                <span class="lb-counter" id="lb-counter"></span>
+            </div>
+        </div>
+        <div class="lightbox-overlay" id="lightbox-overlay"></div>
 
         <!-- Projects -->
         <section id="projects" class="projects-section">

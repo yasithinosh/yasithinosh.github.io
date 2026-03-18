@@ -269,4 +269,176 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     fetchRepos();
+
+    // ─── Achievement Gallery ───────────────────────────────────────────
+    //
+    // HOW TO ADD YOUR OWN PHOTOS / VIDEOS:
+    // 1. Copy your file into  assets/gallery/
+    // 2. Add an entry below following the same object shape.
+    //    type: 'photo'  → src is the image path
+    //    type: 'video'  → src is a YouTube embed URL  OR a local .mp4 path
+    //    category: one of  'event' | 'project' | 'cert' | 'media'
+    //
+    const galleryItems = [
+        {
+            type: 'photo',
+            src: 'assets/gallery/SLASSCOM Digitel Oil lamp.jpeg',
+            thumb: 'assets/gallery/SLASSCOM Digitel Oil lamp.jpeg',
+            title: 'SLASSCOM IT & BPM Exporation Day 2026',
+            caption: 'Dgital Oil Lamp Lighting Ceremony.',
+            category: 'event'
+        },
+        {
+            type: 'photo',
+            src: 'assets/gallery/Wild life camera.jpeg',
+            thumb: 'assets/gallery/Wild life camera.jpeg',
+            title: 'Wild Life Photography',
+            caption: 'Wild Life Photography using Camera Traps.',
+            category: 'media'
+        },
+        {
+            type: 'photo',
+            src: 'assets/gallery/Setificate FOT Media AGM.jpeg',
+            thumb: 'assets/gallery/Setificate FOT Media AGM.jpeg',
+            title: 'FOT Media AGM',
+            caption: 'FOT Media AGM Certificate to the Director Board 2025.',
+            category: 'cert'
+        },
+        // ── ADD YOUR PHOTOS/VIDEOS BELOW ──────────────────────────────
+        // {
+        //     type: 'photo',
+        //     src: 'assets/gallery/my-photo.jpg',
+        //     thumb: 'assets/gallery/my-photo.jpg',
+        //     title: 'My Achievement',
+        //     caption: 'Short description here.',
+        //     category: 'event'   // event | project | cert | media
+        // },
+        // {
+        //     type: 'video',
+        //     src: 'https://www.youtube.com/embed/YOUR_VIDEO_ID',
+        //     thumb: '',           // leave empty for video type
+        //     title: 'My Video',
+        //     caption: 'Short description.',
+        //     category: 'project'
+        // },
+    ];
+
+    let currentGalleryItems = [...galleryItems];
+    let lightboxIndex = 0;
+
+    const galleryGrid = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('lightbox');
+    const lbOverlay = document.getElementById('lightbox-overlay');
+    const lbContent = document.getElementById('lb-content');
+    const lbTitle = document.getElementById('lb-title');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbCounter = document.getElementById('lb-counter');
+
+    const renderGallery = (items) => {
+        galleryGrid.innerHTML = '';
+        if (!items.length) {
+            galleryGrid.innerHTML = '<p class="gallery-empty">No items in this category yet.</p>';
+            return;
+        }
+        items.forEach((item, idx) => {
+            const el = document.createElement('div');
+            el.className = 'gallery-item fade-up';
+            el.dataset.index = idx;
+
+            const badgeIcon = item.type === 'video' ? 'fa-play' : 'fa-camera';
+            const badgeLabel = item.type === 'video' ? 'Video' : 'Photo';
+
+            const mediaHTML = item.type === 'video'
+                ? `<div class="video-thumb"><i class="fas fa-play-circle"></i></div>`
+                : `<img src="${item.src}" alt="${item.title}" loading="lazy">`;
+
+            el.innerHTML = `
+                ${mediaHTML}
+                <div class="gallery-badge"><i class="fas ${badgeIcon}"></i> ${badgeLabel}</div>
+                <div class="gallery-overlay">
+                    <h4>${item.title}</h4>
+                    <p>${item.caption}</p>
+                </div>
+                <div class="gallery-expand"><i class="fas fa-expand-alt"></i></div>
+            `;
+
+            el.addEventListener('click', () => openLightbox(idx));
+            galleryGrid.appendChild(el);
+            revealObserver.observe(el);
+        });
+    };
+
+    const openLightbox = (idx) => {
+        lightboxIndex = idx;
+        updateLightbox();
+        lightbox.classList.add('open');
+        lbOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        lbOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        // Stop any playing video
+        lbContent.innerHTML = '';
+    };
+
+    const updateLightbox = () => {
+        const item = currentGalleryItems[lightboxIndex];
+        lbTitle.textContent = item.title;
+        lbCaption.textContent = item.caption;
+        lbCounter.textContent = `${lightboxIndex + 1} / ${currentGalleryItems.length}`;
+
+        if (item.type === 'video') {
+            const isYoutube = item.src.includes('youtube') || item.src.includes('youtu.be');
+            lbContent.innerHTML = isYoutube
+                ? `<iframe src="${item.src}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+                : `<video src="${item.src}" controls autoplay></video>`;
+        } else {
+            lbContent.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
+        }
+    };
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    lbOverlay.addEventListener('click', closeLightbox);
+
+    document.getElementById('lb-prev').addEventListener('click', () => {
+        lightboxIndex = (lightboxIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+        updateLightbox();
+    });
+
+    document.getElementById('lb-next').addEventListener('click', () => {
+        lightboxIndex = (lightboxIndex + 1) % currentGalleryItems.length;
+        updateLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') {
+            lightboxIndex = (lightboxIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+            updateLightbox();
+        }
+        if (e.key === 'ArrowRight') {
+            lightboxIndex = (lightboxIndex + 1) % currentGalleryItems.length;
+            updateLightbox();
+        }
+    });
+
+    // Filter tabs
+    document.querySelectorAll('.gallery-filter').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            currentGalleryItems = filter === 'all'
+                ? [...galleryItems]
+                : galleryItems.filter(item => item.category === filter);
+            renderGallery(currentGalleryItems);
+        });
+    });
+
+    renderGallery(galleryItems);
 });
+
