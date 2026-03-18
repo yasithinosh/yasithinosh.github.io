@@ -304,6 +304,14 @@ document.addEventListener('DOMContentLoaded', () => {
             caption: 'FOT Media AGM Certificate to the Director Board 2025.',
             category: 'cert'
         },
+        {
+            type: 'photo',
+            src: 'assets/gallery/IOT Group project.jpeg',
+            thumb: 'assets/gallery/IOT Group project.jpeg',
+            title: 'IOT Group project',
+            caption: 'IOT Group project.',
+            category: 'project'   // event | project | cert | media
+        },
         // ── ADD YOUR PHOTOS/VIDEOS BELOW ──────────────────────────────
         // {
         //     type: 'photo',
