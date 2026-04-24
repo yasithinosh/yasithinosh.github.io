@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>Gallery | Yasith Inosh Rajapaksha</title>
+    <meta name="description" content="Achievements, events, and project gallery of Yasith Inosh Rajapaksha.">
+    <meta name="author" content="Yasith Inosh Rajapaksha">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0f1e">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="alternate icon" href="assets/favicon.svg">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">YI<span class="highlight">.</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding-top: 100px; min-height: 80vh;">
+        <!-- Full Gallery -->
+        <section id="gallery" class="gallery-section" style="padding-top: 2rem;">
+            <div class="container">
+                <h1 class="section-title fade-up">Full Gallery</h1>
+                <p class="section-subtitle fade-up delay-100">Browse all my events, projects, and media.</p>
+
+                <!-- Category Filter -->
+                <div class="gallery-filters fade-up delay-200">
+                    <button class="gallery-filter active" data-filter="all">All</button>
+                    <button class="gallery-filter" data-filter="event">Events</button>
+                    <button class="gallery-filter" data-filter="project">Projects</button>
+                    <button class="gallery-filter" data-filter="cert">Certifications</button>
+                    <button class="gallery-filter" data-filter="media">Media & Drone</button>
+                </div>
+
+                <div class="gallery-grid" id="gallery-grid"></div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+            <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lb-next" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="lightbox-content" id="lb-content"></div>
+            <div class="lightbox-info">
+                <h3 class="lb-title" id="lb-title"></h3>
+                <p class="lb-caption" id="lb-caption"></p>
+                <span class="lb-counter" id="lb-counter"></span>
+            </div>
+        </div>
+        <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yasithinosh" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:yasithinosh1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; <span id="footer-year"></span> Yasith Inosh Rajapaksha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/gallery.js"></script>
+</body>
+</html>

@@ -1239,6 +1239,101 @@ header {
 }
 
 /* =============================================
+   GALLERY PREVIEW (HOME PAGE)
+   ============================================= */
+.gallery-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.gallery-cat-card {
+    position: relative;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    text-decoration: none;
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-cat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px var(--shadow-accent);
+    border-color: var(--accent);
+}
+
+.cat-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+    z-index: 1;
+}
+
+.gallery-cat-card:hover .cat-bg {
+    transform: scale(1.08);
+}
+
+.cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 15, 30, 0.95) 0%, rgba(10, 15, 30, 0.6) 50%, rgba(10, 15, 30, 0.3) 100%);
+    z-index: 2;
+    transition: background 0.3s ease;
+}
+
+.gallery-cat-card:hover .cat-overlay {
+    background: linear-gradient(to top, rgba(10, 15, 30, 0.98) 0%, rgba(10, 15, 30, 0.7) 50%, rgba(10, 15, 30, 0.4) 100%);
+}
+
+.cat-content {
+    position: relative;
+    z-index: 3;
+}
+
+.cat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.cat-content h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.cat-count {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.3s ease;
+}
+
+.gallery-cat-card:hover .cat-count {
+    gap: 0.75rem;
+}
+
+/* =============================================
    LIGHTBOX
    ============================================= */
 .lightbox-overlay {

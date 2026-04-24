@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', next);
     });
 
-    // ─── Sticky Header ─────────────────────────────────────────────────
+    // ─── Header Drop Shadow ────────────────────────────────────────────
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
         header.style.boxShadow = window.scrollY > 50
@@ -114,38 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
     });
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            hamburger.querySelector('i').className = 'fas fa-bars';
-        });
-    });
-
-    // ─── Smooth Scroll ─────────────────────────────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // ─── Active Nav Highlight ──────────────────────────────────────────
-    const sections = document.querySelectorAll('section[id]');
-    const navItems = document.querySelectorAll('.nav-link');
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navItems.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-                });
-            }
-        });
-    }, { threshold: 0.4 });
-
-    sections.forEach(s => sectionObserver.observe(s));
-
     // ─── Scroll Reveal ─────────────────────────────────────────────────
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -161,131 +129,18 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 
-    // ─── Typing Animation ──────────────────────────────────────────────
-    const titles = [
-        'Full-Stack Engineer',
-        'DevOps Enthusiast',
-        'Mobile App Developer',
-        'IoT & Embedded Builder',
-        'BICT Undergraduate'
-    ];
-    const typedEl = document.getElementById('typed-text');
-    let titleIdx = 0, charIdx = 0, isDeleting = false;
-
-    const type = () => {
-        const current = titles[titleIdx];
-        typedEl.textContent = isDeleting
-            ? current.substring(0, charIdx--)
-            : current.substring(0, charIdx++);
-
-        let delay = isDeleting ? 50 : 100;
-
-        if (!isDeleting && charIdx > current.length) {
-            delay = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIdx < 0) {
-            isDeleting = false;
-            charIdx = 0;
-            titleIdx = (titleIdx + 1) % titles.length;
-            delay = 400;
-        }
-        setTimeout(type, delay);
-    };
-    type();
-
     // ─── Dynamic Footer Year ───────────────────────────────────────────
     const yearEl = document.getElementById('footer-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // ─── Fetch GitHub Repositories ─────────────────────────────────────
-    const githubUsername = 'yasithinosh';
-    const repoContainer = document.getElementById('repo-grid');
-
-    const langColors = {
-        JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#563d7c',
-        Python: '#3572A5', Java: '#b07219', TypeScript: '#2b7489',
-        Vue: '#41b883', Dart: '#00B4AB', 'C++': '#f34b7d', Shell: '#89e051'
-    };
-
-    const createRepoCard = (repo) => {
-        const div = document.createElement('div');
-        div.className = 'repo-card fade-up';
-
-        const langColor = langColors[repo.language] || '#ccc';
-        const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-
-        div.innerHTML = `
-            <div class="repo-header">
-                <i class="far fa-folder folder-icon"></i>
-                <div class="repo-links">
-                    <a href="${repo.html_url}" target="_blank" aria-label="GitHub Link"><i class="fab fa-github"></i></a>
-                    ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
-                </div>
-            </div>
-            <h3 class="repo-name">${repo.name}</h3>
-            <p class="repo-desc">${repo.description || 'No description available.'}</p>
-            <div class="repo-stats">
-                <div class="repo-lang">
-                    <span style="background-color: ${langColor}"></span>${repo.language || 'Code'}
-                </div>
-                <div class="repo-stars" title="Stars">
-                    <i class="far fa-star"></i> ${repo.stargazers_count}
-                </div>
-                <div class="repo-updated" title="Last Updated">
-                    <i class="far fa-clock"></i> ${updatedDate}
-                </div>
-            </div>
-        `;
-
-        revealObserver.observe(div);
-        return div;
-    };
-
-    const fetchRepos = async () => {
-        repoContainer.innerHTML = '<div class="loader"><i class="fas fa-spinner fa-spin"></i> Loading projects...</div>';
-        try {
-            const res = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&direction=desc`);
-            if (!res.ok) throw new Error('API error');
-
-            const repos = await res.json();
-            const myRepos = repos.filter(r => !r.fork).slice(0, 6);
-
-            if (!myRepos.length) {
-                repoContainer.innerHTML = '<p style="text-align:center; color: var(--text-secondary);">No public repositories found.</p>';
-                return;
-            }
-
-            repoContainer.innerHTML = '';
-            myRepos.forEach(r => repoContainer.appendChild(createRepoCard(r)));
-        } catch (err) {
-            console.error(err);
-            repoContainer.innerHTML = `
-                <div style="text-align:center; width:100%;">
-                    <p style="color:var(--text-secondary); margin-bottom:1rem;">Could not load projects at this time.</p>
-                    <button id="retry-btn" class="btn btn-secondary">Retry</button>
-                </div>`;
-            document.getElementById('retry-btn').addEventListener('click', fetchRepos);
-        }
-    };
-
-    fetchRepos();
-
-    // ─── Achievement Gallery ───────────────────────────────────────────
-    //
-    // HOW TO ADD YOUR OWN PHOTOS / VIDEOS:
-    // 1. Copy your file into  assets/gallery/
-    // 2. Add an entry below following the same object shape.
-    //    type: 'photo'  → src is the image path
-    //    type: 'video'  → src is a YouTube embed URL  OR a local .mp4 path
-    //    category: one of  'event' | 'project' | 'cert' | 'media'
-    //
+    // ─── Full Achievement Gallery ──────────────────────────────────────
     const galleryItems = [
         {
             type: 'photo',
             src: 'assets/gallery/SLASSCOM Digitel Oil lamp.jpeg',
             thumb: 'assets/gallery/SLASSCOM Digitel Oil lamp.jpeg',
             title: 'SLASSCOM IT & BPM Exporation Day 2026',
-            caption: 'Dgital Oil Lamp Lighting Ceremony.',
+            caption: 'Digital Oil Lamp Lighting Ceremony.',
             category: 'event'
         },
         {
@@ -447,72 +302,140 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Event Exhibition',
             caption: 'Exhibition and event coverage.',
             category: 'event'
-        },
-        // ── ADD YOUR PHOTOS/VIDEOS BELOW ──────────────────────────────
-        // {
-        //     type: 'photo',
-        //     src: 'assets/gallery/my-photo.jpg',
-        //     thumb: 'assets/gallery/my-photo.jpg',
-        //     title: 'My Achievement',
-        //     caption: 'Short description here.',
-        //     category: 'event'   // event | project | cert | media
-        // },
-        // {
-        //     type: 'video',
-        //     src: 'https://www.youtube.com/embed/YOUR_VIDEO_ID',
-        //     thumb: '',           // leave empty for video type
-        //     title: 'My Video',
-        //     caption: 'Short description.',
-        //     category: 'project'
-        // },
+        }
     ];
 
-    const galleryGrid = document.getElementById('gallery-preview-grid');
+    let currentGalleryItems = [...galleryItems];
+    let lightboxIndex = 0;
 
-    const renderGalleryPreview = (items) => {
-        if (!galleryGrid) return; // safeguard if not on index.html
-        
+    const galleryGrid = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('lightbox');
+    const lbOverlay = document.getElementById('lightbox-overlay');
+    const lbContent = document.getElementById('lb-content');
+    const lbTitle = document.getElementById('lb-title');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbCounter = document.getElementById('lb-counter');
+
+    const renderGallery = (items) => {
         galleryGrid.innerHTML = '';
-        
-        // Group items by category to find the first one of each
-        const categories = {
-            'event': { title: 'Events', icon: 'fa-calendar-alt' },
-            'project': { title: 'Projects', icon: 'fa-laptop-code' },
-            'cert': { title: 'Certificates', icon: 'fa-certificate' },
-            'media': { title: 'Media & Drone', icon: 'fa-camera-retro' }
-        };
+        if (!items.length) {
+            galleryGrid.innerHTML = '<p class="gallery-empty">No items in this category yet.</p>';
+            return;
+        }
+        items.forEach((item, idx) => {
+            const el = document.createElement('div');
+            el.className = 'gallery-item fade-up';
+            el.dataset.index = idx;
 
-        const previewCards = [];
+            const badgeIcon = item.type === 'video' ? 'fa-play' : 'fa-camera';
+            const badgeLabel = item.type === 'video' ? 'Video' : 'Photo';
 
-        Object.keys(categories).forEach(catKey => {
-            const catItems = items.filter(i => i.category === catKey);
-            if (catItems.length > 0) {
-                const firstItem = catItems[0];
-                const count = catItems.length;
-                
-                const el = document.createElement('a');
-                el.href = `gallery.html?filter=${catKey}`;
-                el.className = 'gallery-cat-card fade-up';
-                
-                // If the first item is a video, use the thumbnail or a placeholder
-                const bgSrc = firstItem.type === 'video' ? 'assets/favicon.svg' : firstItem.src;
+            const mediaHTML = item.type === 'video'
+                ? `<div class="video-thumb"><i class="fas fa-play-circle"></i></div>`
+                : `<img src="${item.src}" alt="${item.title}" loading="lazy">`;
 
-                el.innerHTML = `
-                    <div class="cat-bg" style="background-image: url('${bgSrc}')"></div>
-                    <div class="cat-overlay"></div>
-                    <div class="cat-content">
-                        <div class="cat-icon"><i class="fas ${categories[catKey].icon}"></i></div>
-                        <h3>${categories[catKey].title}</h3>
-                        <span class="cat-count">${count} Photos/Videos <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                `;
+            el.innerHTML = `
+                ${mediaHTML}
+                <div class="gallery-badge"><i class="fas ${badgeIcon}"></i> ${badgeLabel}</div>
+                <div class="gallery-overlay">
+                    <h4>${item.title}</h4>
+                    <p>${item.caption}</p>
+                </div>
+                <div class="gallery-expand"><i class="fas fa-expand-alt"></i></div>
+            `;
 
-                galleryGrid.appendChild(el);
-                revealObserver.observe(el);
-            }
+            el.addEventListener('click', () => openLightbox(idx));
+            galleryGrid.appendChild(el);
+            revealObserver.observe(el);
         });
     };
 
-    renderGalleryPreview(galleryItems);
-});
+    const openLightbox = (idx) => {
+        lightboxIndex = idx;
+        updateLightbox();
+        lightbox.classList.add('open');
+        lbOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
 
+    const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        lbOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        lbContent.innerHTML = ''; // Pause video
+    };
+
+    const updateLightbox = () => {
+        const item = currentGalleryItems[lightboxIndex];
+        lbTitle.textContent = item.title;
+        lbCaption.textContent = item.caption;
+        lbCounter.textContent = `${lightboxIndex + 1} / ${currentGalleryItems.length}`;
+
+        if (item.type === 'video') {
+            const isYoutube = item.src.includes('youtube') || item.src.includes('youtu.be');
+            lbContent.innerHTML = isYoutube
+                ? `<iframe src="${item.src}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+                : `<video src="${item.src}" controls autoplay></video>`;
+        } else {
+            lbContent.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
+        }
+    };
+
+    if (document.getElementById('lb-close')) {
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        lbOverlay.addEventListener('click', closeLightbox);
+
+        document.getElementById('lb-prev').addEventListener('click', () => {
+            lightboxIndex = (lightboxIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+            updateLightbox();
+        });
+
+        document.getElementById('lb-next').addEventListener('click', () => {
+            lightboxIndex = (lightboxIndex + 1) % currentGalleryItems.length;
+            updateLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') {
+                lightboxIndex = (lightboxIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+                updateLightbox();
+            }
+            if (e.key === 'ArrowRight') {
+                lightboxIndex = (lightboxIndex + 1) % currentGalleryItems.length;
+                updateLightbox();
+            }
+        });
+    }
+
+    // Filter tabs
+    const setFilterActive = (filterVal) => {
+        document.querySelectorAll('.gallery-filter').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === filterVal);
+        });
+        currentGalleryItems = filterVal === 'all'
+            ? [...galleryItems]
+            : galleryItems.filter(item => item.category === filterVal);
+        renderGallery(currentGalleryItems);
+    };
+
+    document.querySelectorAll('.gallery-filter').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setFilterActive(btn.dataset.filter);
+            // Optionally update URL to preserve filter on reload without scrolling
+            const url = new URL(window.location);
+            url.searchParams.set('filter', btn.dataset.filter);
+            window.history.replaceState({}, '', url);
+        });
+    });
+
+    // Check URL params for pre-selected filter (from main page preview cards)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialFilter = urlParams.get('filter') || 'all';
+    
+    // Slight timeout so the grid layout works properly
+    setTimeout(() => {
+        setFilterActive(initialFilter);
+    }, 50);
+});

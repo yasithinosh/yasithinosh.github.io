@@ -149,7 +149,7 @@
             <div class="hero-visual fade-up delay-200">
                 <div class="profile-img-container">
                     <div class="profile-glow"></div>
-                    <img src="assets/profile_pic.jpeg" alt="Yasith Inosh" class="profile-img">
+                    <img src="assets/my profile.png" alt="Yasith Inosh" class="profile-img">
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -442,40 +442,6 @@
             </div>
         </section>
 
-        <!-- Gallery -->
-        <section id="gallery" class="gallery-section">
-            <div class="container">
-                <h2 class="section-title fade-up">Achievements & Gallery</h2>
-                <p class="section-subtitle fade-up delay-100">A visual showcase of events, projects, and milestones.</p>
-
-                <!-- Category Filter -->
-                <div class="gallery-filters fade-up delay-200">
-                    <button class="gallery-filter active" data-filter="all">All</button>
-                    <button class="gallery-filter" data-filter="event">Events</button>
-                    <button class="gallery-filter" data-filter="project">Projects</button>
-                    <button class="gallery-filter" data-filter="cert">Certifications</button>
-                    <button class="gallery-filter" data-filter="media">Media & Drone</button>
-                </div>
-
-                <!-- Gallery Grid (populated by JS) -->
-                <div class="gallery-grid" id="gallery-grid"></div>
-            </div>
-        </section>
-
-        <!-- Lightbox Modal -->
-        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-            <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
-            <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
-            <button class="lightbox-nav lb-next" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
-            <div class="lightbox-content" id="lb-content"></div>
-            <div class="lightbox-info">
-                <h3 class="lb-title" id="lb-title"></h3>
-                <p class="lb-caption" id="lb-caption"></p>
-                <span class="lb-counter" id="lb-counter"></span>
-            </div>
-        </div>
-        <div class="lightbox-overlay" id="lightbox-overlay"></div>
-
         <!-- Projects -->
         <section id="projects" class="projects-section">
             <div class="container">
@@ -486,40 +452,67 @@
                 </div>
             </div>
         </section>
-
-        <!-- Contact -->
-        <section id="contact" class="contact-section">
+        <!-- Gallery -->
+        <section id="gallery" class="gallery-section">
             <div class="container">
-                <h2 class="section-title fade-up">Get In Touch</h2>
-                <div class="contact-wrapper fade-up delay-200">
-                    <div class="contact-info">
-                        <h3>Let's work together</h3>
-                        <p>I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <p>yasithinosh1@gmail.com</p>
+                <h2 class="section-title fade-up">Achievements & Gallery</h2>
+                <p class="section-subtitle fade-up delay-100">A visual showcase of events, projects, and milestones.</p>
+
+
+
+                <!-- Gallery Preview -->
+                <section id="gallery" class="gallery-section">
+                    <div class="container">
+                        <h2 class="section-title fade-up">Achievements & Gallery</h2>
+                        <p class="section-subtitle fade-up delay-100">Browse photos by category.</p>
+
+                        <div class="gallery-preview-grid" id="gallery-preview-grid">
+                            <!-- Populated by main.js -->
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Piliyandala, Sri Lanka</p>
-                        </div>
-                        <div class="contact-socials">
-                            <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i
-                                    class="fab fa-github"></i></a>
-                            <a href="https://linkedin.com/in/yasithinosh" target="_blank" aria-label="LinkedIn"><i
-                                    class="fab fa-linkedin"></i></a>
+
+                        <div style="text-align: center; margin-top: 3rem;" class="fade-up delay-200">
+                            <a href="gallery.html" class="btn btn-primary gallery-view-all">
+                                View Full Gallery <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    <form class="contact-form" action="https://formspree.io/f/xqeylrer" method="POST">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send
-                            Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+                </section>
+
+
+                <!-- Contact -->
+                <section id="contact" class="contact-section">
+                    <div class="container">
+                        <h2 class="section-title fade-up">Get In Touch</h2>
+                        <div class="contact-wrapper fade-up delay-200">
+                            <div class="contact-info">
+                                <h3>Let's work together</h3>
+                                <p>I'm currently open to new opportunities and collaborations. Feel free to reach out!
+                                </p>
+                                <div class="info-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <p>yasithinosh1@gmail.com</p>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Piliyandala, Sri Lanka</p>
+                                </div>
+                                <div class="contact-socials">
+                                    <a href="https://github.com/yasithinosh" target="_blank" aria-label="GitHub"><i
+                                            class="fab fa-github"></i></a>
+                                    <a href="https://linkedin.com/in/yasithinosh" target="_blank"
+                                        aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <form class="contact-form" action="https://formspree.io/f/xqeylrer" method="POST">
+                                <input type="text" name="name" placeholder="Your Name" required>
+                                <input type="email" name="email" placeholder="Your Email" required>
+                                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send
+                                    Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
     </main>
 
     <footer class="footer">
@@ -531,7 +524,7 @@
                         class="fab fa-linkedin"></i></a>
                 <a href="mailto:yasithinosh1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>&copy; <span id="footer-year"></span> Yasith Inosh Rajapaksha. All rights reserved.</p>
+            <p>&copy; <span id="footer-year"></span> InoVoid Development. All rights reserved.</p>
         </div>
     </footer>
 
